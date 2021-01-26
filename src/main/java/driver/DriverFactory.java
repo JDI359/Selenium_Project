@@ -2,6 +2,8 @@ package driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
@@ -21,5 +23,14 @@ private static final String IGNORE_CERTIFICATE = "--ignore-certificate-errors";
         return driver;
     }
 
-    //Homework - implement the same for Chrome!!!
+    public static WebDriver getChromeDriver(int implicitWait){
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments(IGNORE_CERTIFICATE);
+
+        WebDriverManager.getInstance(ChromeDriver.class).setup();
+        WebDriver driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
+
+        return driver;
+    }
 }

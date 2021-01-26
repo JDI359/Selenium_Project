@@ -6,12 +6,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class RegisterPage extends BasePage{
 
-        @FindBy(xpath="//a[@id='header-signin-link']")
-        private WebElement signInButton;
-
-        @FindBy(xpath="//a[@id='createacc']")
-        private WebElement createAccButton;
-
         @FindBy(xpath="//input[@id='usernamereg-firstName']")
         private WebElement firstNameReg;
 
@@ -23,9 +17,6 @@ public class RegisterPage extends BasePage{
 
         @FindBy(xpath="//input[@id='usernamereg-password']")
         private WebElement passwordReg;
-
-        @FindBy(xpath="//input[@id='usernamereg-phone']")
-        private WebElement phoneReg;
 
         @FindBy(xpath="//input[@id='usernamereg-phone']")
         private WebElement phoneReg;
@@ -43,10 +34,15 @@ public class RegisterPage extends BasePage{
             super(driver);
         }
 
-        public ProductListerPage login (String usernameField, String passwordField){
-            username.sendKeys(usernameField);
-            password.sendKeys(passwordField);
-            loginButton.click();
-            return new ProductListerPage(driver);
+        public regInfoPopulation (String firstNameField, String lastNameField, String emailField, int phoneField){
+                firstNameReg.sendKeys(firstNameField);
+                lastNameReg.sendKeys(lastNameField);
+                emailReg.sendKeys(emailField);
+                //ВЕРОЯТНО ТРЯБВА ДА ГО ПРЕОБРАЗУВАМ ДО ИНТ
+                phoneReg.sendKeys(phoneField);
+                selectMonthDropdownReg.click();
+                selectMonthMayReg.click();
+                continueButtonForReg.click();
+            return;
         }
 }
