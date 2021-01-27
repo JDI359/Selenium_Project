@@ -43,7 +43,7 @@ import java.util.Properties;
         private void setupBrowserDriver(){
             driver = DriverFactory.getFirefoxDriver(implicitWait);
             //maybe add something more?
-            driver = DriverFactory.getChromeDriver(implicitWait);
+//            driver = DriverFactory.getChromeDriver(implicitWait);
         }
 
         private void loadUrl(){

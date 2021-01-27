@@ -23,14 +23,14 @@ private static final String IGNORE_CERTIFICATE = "--ignore-certificate-errors";
         return driver;
     }
 
-    public static WebDriver getChromeDriver(int implicitWait){
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments(IGNORE_CERTIFICATE);
-
-        WebDriverManager.getInstance(ChromeDriver.class).setup();
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
-
-        return driver;
-    }
+//    public static WebDriver getChromeDriver(int implicitWait){
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments(IGNORE_CERTIFICATE);
+//
+//        WebDriverManager.getInstance(ChromeDriver.class).setup();
+//        WebDriver driver = new ChromeDriver(options);
+//        driver.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
+//
+//        return driver;
+//    }
 }

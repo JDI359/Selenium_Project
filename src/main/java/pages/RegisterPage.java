@@ -30,18 +30,26 @@ public class RegisterPage extends BasePage{
         @FindBy(xpath="//button[@id='reg-submit-button']")
         private WebElement continueButtonForReg;
 
-        public RegisterPage(WebDriver driver){
-            super(driver);
+        @FindBy(xpath="//input[@id='usernamereg-day']")
+        private WebElement dayReg;
+
+        @FindBy(xpath="//input[@id='usernamereg-year']")
+        public WebElement yearReg;
+
+        public RegisterPage(WebDriver driver) {
+                super(driver);
         }
 
-        public regInfoPopulation (String firstNameField, String lastNameField, String emailField, int phoneField){
+        public void regInfoPopulation (String firstNameField, String lastNameField, String emailField, String phoneField, String dayField, String yearField){
                 firstNameReg.sendKeys(firstNameField);
                 lastNameReg.sendKeys(lastNameField);
                 emailReg.sendKeys(emailField);
-                //ВЕРОЯТНО ТРЯБВА ДА ГО ПРЕОБРАЗУВАМ ДО ИНТ
+                //ВЕРОЯТНО ЩЕ ТРЯБВА ДА ПРЕОБРАЗУВАМ ДО ИНТ?
                 phoneReg.sendKeys(phoneField);
                 selectMonthDropdownReg.click();
                 selectMonthMayReg.click();
+                dayReg.sendKeys(dayField);
+                yearReg.sendKeys(yearField);
                 continueButtonForReg.click();
             return;
         }
