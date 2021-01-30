@@ -1,6 +1,2 @@
-TestName,TestFamName, qwerty, 888888888, ..., 4, 2022
-TestName2,TestFamName2, wasd, 888888888, //////, 33, 1800
-
-TestName,TestFamName, email, password, phoneNumber, day, year
-
-
+TestName,TestFamName,test,zaz,000,af,fff
+TestName2,TestFamName2,testing,zal,023,az,ff

@@ -1,13 +1,11 @@
 import com.opencsv.exceptions.CsvException;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 import pages.LoginPage;
 import pages.MainPage_NavigationMenu;
 import pages.RegisterPage;
@@ -16,58 +14,62 @@ import java.io.IOException;
 
 public class TestCase1 extends TestUtils {
 
+
     @DataProvider(name = "reg-data-file")
     public static Object[][] dataProviderFromCsvFile() throws IOException, CsvException {
         return CsvReader.readCsvFile("src/test/resources/login_data.csv");
     }
 
 
-    @Test
-    public void reachRegistrationPage() throws InterruptedException {
+    @Test(dataProvider = "reg-data-file")
+    public void falseRegistration (String firstNameField, String lastNameField, String emailField, String passwordField, String phoneField, String dayField, String yearField) {
 
+        initTest();
 
         MainPage_NavigationMenu signInStep = new MainPage_NavigationMenu(driver);
+        MainPage_NavigationMenu popUp = signInStep.acceptCookies();
         LoginPage loginPage = signInStep.login();
-
         Reporter.log("Jump to sign in is successful.");
 
         LoginPage clickRegisterStep = new LoginPage(driver);
         RegisterPage registerPage = clickRegisterStep.login();
-
         Reporter.log("Jump to register is successful.");
 
-        Thread.sleep(2000);
+        RegisterPage reg = new RegisterPage(driver);
 
-//        //Hard assert
-//        Assert.assertTrue(productListerPage.isProductPriceCorrect("Sauce Labs Backpack", "$29.99"));
-//
-//        //Soft asserts
-//        SoftAssert softAssert = new SoftAssert();
-//        softAssert.assertTrue(productListerPage.isProductPriceCorrect("Sauce Labs Backpack", "$29.99"));
-//        softAssert.assertTrue(productListerPage.isProductPriceCorrect("Sauce Bike Light", "$222.99"));
-//        softAssert.assertFalse(productListerPage.isProductPriceCorrect("Sauce Bike Light", "$29.99"));
-//
-//        softAssert.assertAll();
-    }
+        WebElement username = reg.getFirstNameReg();
+        username.sendKeys(firstNameField);
 
-    @Test(dataProvider = "reg-data-file")
-    public void falseRegistration (String user, String pass){
+        WebElement lastname = reg.getLastNameReg();
+        lastname.sendKeys(lastNameField);
 
-        RegisterPage registerPage = new RegisterPage(driver);
-//        RegisterPage registerPage1 = registerPage.regInfoPopulation();
+        WebElement password = reg.getPasswordReg();
+        password.sendKeys(passwordField);
 
-//        WebElement yearReg
+        WebElement email =  reg.getEmailReg();
+        email.sendKeys(emailField);
 
-//        WebElement username = driver.findElement(By.id("user-name"));
-//        username.sendKeys(user);
-//
-//        WebElement password = driver.findElement(By.xpath("//input[@placeholder='Password']"));
-//        password.sendKeys(pass);
-//
-//        WebElement loginButton = driver.findElement(By.className("btn_action"));
-//        loginButton.click();
-//        JavascriptExecutor js = (JavascriptExecutor) driver;
-//        js.executeScript("arguments[0].scrollIntoView();", loginButton);
-//        js.executeScript("arguments[0].click();", loginButton);
+        WebElement phone =  reg.getPhoneReg();
+        phone.sendKeys(phoneField);
+
+        Select birthMonth = new Select(driver.findElement(By.id("usernamereg-month")));
+        birthMonth.selectByVisibleText("May");
+
+        WebElement days =  reg.getDayReg();
+        days.sendKeys(dayField);
+
+        WebElement years =  reg.getYearReg();
+        years.sendKeys(yearField);
+
+        WebElement confirmReg = reg.getContRegButton();
+        confirmReg.click();
+
+
+        Assert.assertTrue(reg.getIsYidErrorPresent().isDisplayed());
+        Assert.assertTrue(reg.getIsPasswordErrorPresent().isDisplayed());
+        Assert.assertTrue(reg.getIsPhoneErrorPresent().isDisplayed());
+        Assert.assertTrue(reg.getIsBirthDateErrorPresent().isDisplayed());
+
+        tearDownDriver();
     }
 }
