@@ -29,6 +29,7 @@ public class MainPage_NavigationMenu extends BasePage {
         super(driver);
     }
 
+
     public MainPage_NavigationMenu acceptCookies(){
         if(isAgreeDisplayed()){
             termsOfServiceButton.click();
