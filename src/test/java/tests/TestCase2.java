@@ -27,7 +27,7 @@ public class TestCase2 extends TestUtils {
     public void companyStatisticsCheck(){
 
         MainPage_NavigationMenu cookies = new MainPage_NavigationMenu(driver);
-        MainPage_NavigationMenu popUp = cookies.acceptCookies();
+        cookies.acceptCookies();
         Reporter.log("Cookies accepted.");
     }
 

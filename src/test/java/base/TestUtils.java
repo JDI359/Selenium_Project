@@ -26,7 +26,6 @@ public class TestUtils {
             browser = config.getProperty("browser");
             url = config.getProperty("urlAddress");
             implicitWait = Integer.parseInt(config.getProperty("implicitWait"));
-            //browser to be taken from property file!!!
             log.info("Url is: " + url);
         } catch (IOException e) {
             e.printStackTrace();

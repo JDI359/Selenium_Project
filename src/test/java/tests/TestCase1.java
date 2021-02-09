@@ -29,7 +29,7 @@ public class TestCase1 extends TestUtils {
     public void falseRegistration () {
 
         MainPage_NavigationMenu signInStep = new MainPage_NavigationMenu(driver);
-        MainPage_NavigationMenu popUp = signInStep.acceptCookies();
+        signInStep.acceptCookies();
         LoginPage loginPage = signInStep.login();
         Reporter.log("Jump to sign in is successful.");
 

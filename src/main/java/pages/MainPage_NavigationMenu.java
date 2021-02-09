@@ -21,19 +21,17 @@ public class MainPage_NavigationMenu extends BasePage {
     private WebElement searchButton;
 
     public boolean isAgreeDisplayed() {
-         termsOfServiceButton.isDisplayed();
-         return true;
+         return termsOfServiceButton.isDisplayed();
     }
 
     public MainPage_NavigationMenu(WebDriver driver) {
         super(driver);
     }
 
-    public MainPage_NavigationMenu acceptCookies(){
+    public void acceptCookies(){
         if(isAgreeDisplayed()){
             termsOfServiceButton.click();
         }
-        return null;
     }
 
     public LoginPage login(){
