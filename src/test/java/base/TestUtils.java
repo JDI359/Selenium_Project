@@ -13,6 +13,7 @@ import java.util.Properties;
 
 @Slf4j
 public class TestUtils {
+    private String browser;
     private String url;
     private int implicitWait;
     public WebDriver driver;
@@ -22,6 +23,7 @@ public class TestUtils {
         try(FileInputStream configFile = new FileInputStream("src/test/resources/config.properties")){
             Properties config = new Properties();
             config.load(configFile);
+            browser = config.getProperty("browser");
             url = config.getProperty("urlAddress");
             implicitWait = Integer.parseInt(config.getProperty("implicitWait"));
             //browser to be taken from property file!!!
@@ -43,9 +45,11 @@ public class TestUtils {
     }
 
     private void setupBrowserDriver(){
-        driver = DriverFactory.getFirefoxDriver(implicitWait);
-        //maybe add something more?
-//            driver = DriverFactory.getChromeDriver(implicitWait);
+        if (browser.equals("Firefox")) {
+            driver = DriverFactory.getFirefoxDriver(implicitWait);
+        }else {
+            driver = DriverFactory.getChromeDriver(implicitWait);
+        }
     }
 
     private void loadUrl(){
