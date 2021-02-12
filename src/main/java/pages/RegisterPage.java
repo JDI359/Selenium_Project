@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 @Getter
 public class RegisterPage extends BasePage{
@@ -47,6 +48,16 @@ public class RegisterPage extends BasePage{
 
         @FindBy(xpath=("//div[@id='reg-error-birthDate']"))
         private WebElement isBirthDateErrorPresent;
+
+        public void selectBirthMonth(){
+                Select birthMonth = new Select(driver.findElement(By.id("usernamereg-month")));
+                birthMonth.selectByVisibleText("May");
+        }
+
+        public RegisterPage clickRegButton(){
+                contRegButton.click();
+                return new RegisterPage(driver);
+        }
 
 
         public RegisterPage(WebDriver driver) {

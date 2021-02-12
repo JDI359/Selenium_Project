@@ -2,13 +2,10 @@ package tests;
 
 import base.TestUtils;
 import com.opencsv.exceptions.CsvException;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.MainPage_NavigationMenu;
@@ -59,8 +56,7 @@ public class TestCase1 extends TestUtils {
         WebElement phone =  reg.getPhoneReg();
         phone.sendKeys(phoneField);
 
-        Select birthMonth = new Select(driver.findElement(By.id("usernamereg-month")));
-        birthMonth.selectByVisibleText("May");
+        reg.selectBirthMonth();
 
         WebElement days =  reg.getDayReg();
         days.sendKeys(dayField);
@@ -68,8 +64,7 @@ public class TestCase1 extends TestUtils {
         WebElement years =  reg.getYearReg();
         years.sendKeys(yearField);
 
-        WebElement confirmReg = reg.getContRegButton();
-        confirmReg.click();
+        reg.clickRegButton();
 
 
         Assert.assertTrue(reg.getIsYidErrorPresent().isDisplayed());
